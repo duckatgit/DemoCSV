@@ -1,0 +1,59 @@
+﻿@{
+    ViewBag.Title = "Demo";
+    Layout = null;
+}
+
+<html>
+
+<head>
+    <h1>Json to HTML Table</h1>
+    <title>jJsonViewer</title>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1, shrink-to-fit=no" name="viewport">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Json to HTML Table</title>
+    <meta name="author" content="Derek Eder">
+    <meta content="Display any json file as a searchable, filterable, pretty HTML table">
+
+    <!-- Bootstrap core CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS"
+          crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.19/css/dataTables.bootstrap4.min.css">
+
+    <link href="~/Content/jjsonviewer.css" rel="stylesheet" />
+</head>
+<body>
+    <div id="jjson" class="jjson"></div>
+    <div class="row">
+
+        <div class="col-lg-12">
+            <input id="upload" onchange="loadFile(event)" class="btn-primary btn" type=file accept="application/JSON" name="files[]" size=30>
+        </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script src="~/Scripts/jjsonviewer.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+
+            $("#upload").on("change", function () {
+
+                var reader = new FileReader();
+                reader.onload = onReaderLoad;
+                reader.readAsText(event.target.files[0]);
+            });
+        });
+
+        function InitializeJsonViewer(jjson) {
+
+            $("#jjson").jJsonViewer(jjson);
+        }
+
+        function onReaderLoad(event) {
+            console.log(event.target.result);
+            InitializeJsonViewer(event.target.result);
+        }
+
+
+    </script>
+</body>
+</html>
